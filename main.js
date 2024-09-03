@@ -1,4 +1,3 @@
-<script>
 
       window.addEventListener("load", function () {
 
@@ -214,17 +213,7 @@
 
 
 
-    </script>
 
-
-
-    <!-- gsap text animation end-->
-
-
-
-    <!-- circle gsap animation start-->
-
-    <script>
 
 
 
@@ -300,17 +289,6 @@
 
 
 
-    </script>
-
-    <!-- circle gsap animation end-->
-
-
-
-
-
-    <!-- paragraph gsap animation start-->
-
-    <script>
 
       gsap.registerPlugin(ScrollTrigger);
 
@@ -368,15 +346,6 @@
 
       });
 
-    </script>
-
-    <!-- paragraph gsap animation end-->
-
-
-
-    <!-- image gsap animation start-->
-
-    <script>
 
       gsap.registerPlugin(ScrollTrigger);
 
@@ -454,9 +423,7 @@
 
       });
 
-    </script>
 
-    <script>
 
       gsap.registerPlugin(ScrollTrigger);
 
@@ -536,11 +503,6 @@
 
 
 
-    </script>
-
-
-
-    <script>
 
       gsap.registerPlugin(ScrollTrigger);
 
@@ -616,9 +578,7 @@
 
       });
 
-    </script>
 
-    <script>
 
       gsap.registerPlugin(ScrollTrigger);
 
@@ -696,15 +656,7 @@
 
       });
 
-    </script>
 
-    <!-- image gsap animation end-->
-
-
-
-    <!-- learning box hover start -->
-
-    <script>
 
       document.addEventListener('DOMContentLoaded', function() {
 
@@ -732,6 +684,5 @@
 
       });
 
-    </script>
 
 
