@@ -197,13 +197,10 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.utils.toArray(".paragraph").forEach((paragraph) => {
   gsap.fromTo(
     paragraph,
-
     {
       y: 100, // Start 100px below
-
       opacity: 0, // Start fully transparent
     },
-
     {
       y: 0,
 
