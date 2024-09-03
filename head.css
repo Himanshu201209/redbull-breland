@@ -1,0 +1,63 @@
+.reveal-text {
+        visibility: hidden;
+      }
+      .line {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+      }
+      .reveal-image {
+        overflow: hidden;
+      }
+      .reveal-image img {
+        display: block;
+      }
+      .paragraph {
+        opacity: 0; /* Start hidden for the animation */
+        transform: translateY(100px); /* Start 100px below for the animation */
+      }
+      .image-container,
+      .image-move {
+        overflow: hidden;
+      }
+      .image-container img,
+      .image-move img {
+        will-change: transform;
+      }
+      p {
+    margin-bottom: 0px;}
+  .page-wrapper{
+    overflow:clip;
+  }
+  @media (max-width: 568px) {
+        .learning-author-box {
+          mix-blend-mode: soft-light;
+        }
+        .learning-author-box.active {
+          mix-blend-mode: normal;
+        }
+      }
+
+html { font-size: calc(0.5312500000000001rem + 0.5208333333333333vw)!important; }
+
+@media screen and (max-width:1920px) { html { font-size: calc(0.5312499999999998rem + 0.5208333333333335vw)!important; } }
+
+@media screen and (max-width:1440px) { html { font-size: calc(0.39866369710467703rem + 0.6681514476614699vw)!important; } }
+
+@media screen and (max-width:991px) { html { font-size: 1rem!important; } }
+
+.page-wrapper{
+
+overflow:clip;
+
+}
+body{
+	overflow-x: hidden;
+}
+@media only screen and (max-width: 550px) {
+
+.hero-summary-block .reveal-text{
+
+box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.25);
+
+}}
