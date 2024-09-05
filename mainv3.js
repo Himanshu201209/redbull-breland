@@ -1,4 +1,26 @@
-document.addEventListener("DOMContentLoaded", function () {
+function runWhenElementIsAvailable(selector, callback) {
+  const targetNode = document.body; // You can narrow this down to a specific part of the DOM if necessary
+
+  // Check if the element is already available
+  if (document.querySelector(selector)) {
+    callback();
+    return; // Exit if the element is already found
+  }
+
+  // Create an observer instance
+  const observer = new MutationObserver(function (mutationsList, observer) {
+    if (document.querySelector(selector)) {
+      callback(); // Run the script
+      observer.disconnect(); // Stop observing once the element is found
+    }
+  });
+
+  // Start observing the document body for changes
+  observer.observe(targetNode, { childList: true, subtree: true });
+}
+
+runWhenElementIsAvailable(".cta-logo-block", function () {
+  console.log(".cta-logo-block element is available.");
   // Function to split text into words
   let splitWords = function (selector) {
     var elements = document.querySelectorAll(selector);
