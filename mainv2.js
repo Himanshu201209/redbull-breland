@@ -1,146 +1,143 @@
-window.addEventListener("load", function () {
-  // Function to split text into words
+// Function to split text into words
+let splitWords = function (selector) {
+  var elements = document.querySelectorAll(selector);
 
-  let splitWords = function (selector) {
-    var elements = document.querySelectorAll(selector);
+  elements.forEach(function (el) {
+    el.dataset.splitText = el.textContent;
 
-    elements.forEach(function (el) {
-      el.dataset.splitText = el.textContent;
+    el.innerHTML = el.textContent
 
-      el.innerHTML = el.textContent
+      .split(/\s/)
 
-        .split(/\s/)
+      .map(function (word) {
+        return word
 
-        .map(function (word) {
-          return word
+          .split("-")
 
-            .split("-")
+          .map(function (word) {
+            return '<span class="word">' + word + "</span>";
+          })
 
-            .map(function (word) {
-              return '<span class="word">' + word + "</span>";
-            })
+          .join('<span class="hyphen">-</span>');
+      })
 
-            .join('<span class="hyphen">-</span>');
-        })
+      .join('<span class="whitespace"> </span>');
+  });
+};
 
-        .join('<span class="whitespace"> </span>');
-    });
-  };
+// Function to wrap text lines in span elements
 
-  // Function to wrap text lines in span elements
+let splitLines = function (selector) {
+  var elements = document.querySelectorAll(selector);
 
-  let splitLines = function (selector) {
-    var elements = document.querySelectorAll(selector);
+  splitWords(selector);
 
-    splitWords(selector);
+  elements.forEach(function (el) {
+    var lines = getLines(el);
 
-    elements.forEach(function (el) {
-      var lines = getLines(el);
+    var wrappedLines = "";
 
-      var wrappedLines = "";
+    lines.forEach(function (wordsArr) {
+      wrappedLines += '<span class="line"><span class="words">';
 
-      lines.forEach(function (wordsArr) {
-        wrappedLines += '<span class="line"><span class="words">';
-
-        wordsArr.forEach(function (word) {
-          wrappedLines += word.outerHTML;
-        });
-
-        wrappedLines += "</span></span>";
+      wordsArr.forEach(function (word) {
+        wrappedLines += word.outerHTML;
       });
 
-      el.innerHTML = wrappedLines;
+      wrappedLines += "</span></span>";
     });
-  };
 
-  // Function to get lines of text
+    el.innerHTML = wrappedLines;
+  });
+};
 
-  let getLines = function (el) {
-    var lines = [];
+// Function to get lines of text
 
-    var line;
+let getLines = function (el) {
+  var lines = [];
 
-    var words = el.querySelectorAll("span");
+  var line;
 
-    var lastTop;
+  var words = el.querySelectorAll("span");
 
-    for (var i = 0; i < words.length; i++) {
-      var word = words[i];
+  var lastTop;
 
-      if (word.offsetTop != lastTop) {
-        // Don't start with whitespace
+  for (var i = 0; i < words.length; i++) {
+    var word = words[i];
 
-        if (!word.classList.contains("whitespace")) {
-          lastTop = word.offsetTop;
+    if (word.offsetTop != lastTop) {
+      // Don't start with whitespace
 
-          line = [];
+      if (!word.classList.contains("whitespace")) {
+        lastTop = word.offsetTop;
 
-          lines.push(line);
-        }
+        line = [];
+
+        lines.push(line);
       }
-
-      line.push(word);
     }
 
-    return lines;
-  };
+    line.push(word);
+  }
 
-  splitLines(".reveal-text");
+  return lines;
+};
 
-  gsap.registerPlugin(ScrollTrigger);
+splitLines(".reveal-text");
 
-  let revealText = document.querySelectorAll(".reveal-text");
+gsap.registerPlugin(ScrollTrigger);
 
-  revealText.forEach((element) => {
-    const lines = element.querySelectorAll(".words");
+let revealText = document.querySelectorAll(".reveal-text");
 
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: element,
+revealText.forEach((element) => {
+  const lines = element.querySelectorAll(".words");
 
-        toggleActions: "restart none none reset",
-      },
-    });
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: element,
 
-    tl.set(element, { autoAlpha: 1 });
-
-    tl.from(lines, 1, {
-      yPercent: 100,
-
-      ease: Power3.out,
-
-      stagger: 0.1,
-
-      delay: 0,
-    });
+      toggleActions: "restart none none reset",
+    },
   });
 
-  // Animate images
+  tl.set(element, { autoAlpha: 1 });
 
-  let revealImages = document.querySelectorAll(".reveal-image");
+  tl.from(lines, 1, {
+    yPercent: 100,
 
-  revealImages.forEach((element) => {
-    const images = element.querySelectorAll("img");
+    ease: Power3.out,
 
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: element,
+    stagger: 0.1,
 
-        toggleActions: "restart none none reset",
-      },
-    });
+    delay: 0,
+  });
+});
 
-    tl.set(element, { autoAlpha: 1 });
+// Animate images
 
-    tl.from(images, 1, {
-      yPercent: 100,
+let revealImages = document.querySelectorAll(".reveal-image");
 
-      ease: Power3.out,
+revealImages.forEach((element) => {
+  const images = element.querySelectorAll("img");
 
-      stagger: 0.2,
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: element,
 
-      delay: 0.1,
-    });
+      toggleActions: "restart none none reset",
+    },
+  });
+
+  tl.set(element, { autoAlpha: 1 });
+
+  tl.from(images, 1, {
+    yPercent: 100,
+
+    ease: Power3.out,
+
+    stagger: 0.2,
+
+    delay: 0.1,
   });
 });
 
@@ -424,20 +421,18 @@ window.addEventListener("resize", () => {
   checkScreenSize();
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const boxes = document.querySelectorAll(".learning-author-box");
+const boxes = document.querySelectorAll(".learning-author-box");
 
-  boxes.forEach(function (box) {
-    box.addEventListener("click", function () {
-      // Remove active class from all boxes
+boxes.forEach(function (box) {
+  box.addEventListener("click", function () {
+    // Remove active class from all boxes
 
-      boxes.forEach(function (b) {
-        b.classList.remove("active");
-      });
-
-      // Add active class to the clicked box
-
-      box.classList.add("active");
+    boxes.forEach(function (b) {
+      b.classList.remove("active");
     });
+
+    // Add active class to the clicked box
+
+    box.classList.add("active");
   });
 });
